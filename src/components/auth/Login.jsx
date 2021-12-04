@@ -32,6 +32,7 @@ const Login = (props) => {
   }, [login]);
   useEffect(() => {
     return () => dispatch(resetAuthDataAC());
+    // eslint-disable-next-line
   }, []);
   const [loginData, handleLoginData] = useState({ ...initialLoginValues });
 

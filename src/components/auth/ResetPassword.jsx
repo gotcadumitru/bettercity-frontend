@@ -28,6 +28,7 @@ const ResetPassword = (props) => {
   }, [resetPassword]);
   useEffect(() => {
     return () => dispatch(resetAuthDataAC());
+    // eslint-disable-next-line
   }, []);
   const handleSubmit = async () => {
     if (checkIfExistErrors()) return;

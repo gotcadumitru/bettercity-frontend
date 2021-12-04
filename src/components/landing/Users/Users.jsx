@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Input from '../../../common/components/common/Input';
+import { fetchAllUsersThunk } from '../../../common/state/thunk/user.thunk';
 const Users = ({ ...props }) => {
   const [inputData, handleInputData] = useState('');
+  const allUsers = useSelector((state) => state.profileInfo.allUsers.data);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchAllUsersThunk());
+    // eslint-disable-next-line
+  }, []);
   const handleInput = () => {
     const handleChangeInput = (e) => {
       handleInputData(e.target.value);
@@ -18,15 +27,15 @@ const Users = ({ ...props }) => {
           <div className="user-table__header-item">Role</div>
           <div className="user-table__header-item">Raported Issues</div>
         </div>
-        {[...new Array(30)]
-          .filter((m, n) => `${n}`.toLowerCase().includes(inputData.toLowerCase()))
-          .map((m, n) => (
-            <div key={n} className="user-table__row">
-              <div key={n} className="user-table__row-content">
-                <div className="user-table__header-item">User Name {n}</div>
-                <div className="user-table__header-item">email.addre{n}ss@mail.com</div>
-                <div className="user-table__header-item">Role {n}</div>
-                <div className="user-table__header-item">Issue {n}</div>
+        {allUsers
+          .filter((user) => `${user.email} ${user.name} ${user.role}`.toLowerCase().includes(inputData.toLowerCase()))
+          .map((user) => (
+            <div key={user.id} className="user-table__row">
+              <div className="user-table__row-content">
+                <div className="user-table__header-item">{user.name}</div>
+                <div className="user-table__header-item">{user.email}</div>
+                <div className="user-table__header-item">{user.role}</div>
+                <div className="user-table__header-item">{user.raportedIssues ?? 0}</div>
               </div>
             </div>
           ))}

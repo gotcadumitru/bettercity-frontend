@@ -15,6 +15,13 @@ export const authAPI = {
       },
     });
   },
+  async getAllUsers() {
+    return instance.get(`/users`, {
+      headers: {
+        Authorization: 'Bearer ' + authToken.getToken(),
+      },
+    });
+  },
 
   async register({ name, surname, email, password, ...other }) {
     return instance.post(`/register`, {
@@ -25,14 +32,6 @@ export const authAPI = {
     });
   },
 
-  async upload(data) {
-    return instance.post(`/upload`, data, {
-      headers: {
-        Authorization: 'Bearer ' + authToken.getToken(),
-        'Access-Control-Allow-Origin': '*',
-      },
-    });
-  },
   async login({ email, password }) {
     return instance.post(`/login`, {
       email,
@@ -53,17 +52,6 @@ export const authAPI = {
       }
     );
   },
-  async logingoogle(token) {
-    return instance.post(`api/auth/googlelogin`, {
-      token,
-    });
-  },
-  async loginfacebook(accessToken, userID) {
-    return instance.post(`api/auth/facebooklogin`, {
-      userID,
-      accessToken,
-    });
-  },
 
   async forgotPassword(email) {
     return instance.post(`api/auth/forgotpassword`, {
@@ -81,19 +69,19 @@ export const authAPI = {
 };
 
 export const otherAPI = {
-  async addOther({ imageURL, name, description }) {
-    return instance.post(
-      `api/other/add`,
-      {
-        name,
-        imageURL,
-        description,
+  async addIssue(data) {
+    return instance.post(`/issues/create`, data, {
+      headers: {
+        Authorization: 'Bearer ' + authToken.getToken(),
+        'Access-Control-Allow-Origin': '*',
       },
-      {
-        headers: {
-          'auth-token': authToken.getToken(),
-        },
-      }
-    );
+    });
+  },
+  async getAllIssues() {
+    return instance.get(`/issues`, {
+      headers: {
+        Authorization: 'Bearer ' + authToken.getToken(),
+      },
+    });
   },
 };

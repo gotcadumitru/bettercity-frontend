@@ -11,6 +11,10 @@ const initialState = {
     fetchStatus: FetchStatus.NULL,
     message: '',
   },
+  allUsers: {
+    data: [],
+    fetchStatus: FetchStatus.NULL,
+  },
   forgotPassword: {
     fetchStatus: FetchStatus.NULL,
     message: '',
@@ -49,6 +53,16 @@ const userReducer = (state = initialState, action) => {
         ...state,
         user: {
           ...state.user,
+          data: action.payload,
+          fetchStatus: FetchStatus.SUCCESS,
+        },
+      };
+    }
+    case userActions.FETCH_ALL_USERS_SUCCESS: {
+      return {
+        ...state,
+        allUsers: {
+          ...state.allUsers,
           data: action.payload,
           fetchStatus: FetchStatus.SUCCESS,
         },

@@ -18,8 +18,25 @@
   }
   &__body {
     margin-top: 20px;
+    &--issues {
+      display: grid;
+      grid-template-columns: repeat(5, calc(20% - 30px));
+      column-gap: 30px;
+      @media screen and (max-width: 1900px) {
+        grid-template-columns: repeat(4, calc(25% - 30px));
+      }
+      @media screen and (max-width: 1500px) {
+        grid-template-columns: repeat(3, calc(33.33% - 30px));
+      }
+      @media screen and (max-width: 1100px) {
+        grid-template-columns: repeat(2, calc(50% - 30px));
+      }
+      @media screen and (max-width: 500px) {
+        grid-template-columns: 100%;
+        column-gap: 0;
+      }
+    }
   }
-  background-image: url();
 }
 
 .user-table {
@@ -55,5 +72,11 @@
     justify-content: space-between;
     margin: 0 auto;
     grid-template-columns: 25% 30% 25% 20%;
+  }
+  &__header-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 5px;
   }
 }

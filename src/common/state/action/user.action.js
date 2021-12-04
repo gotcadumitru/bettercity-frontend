@@ -3,6 +3,8 @@ export const userActions = {
   FETCH_AUTH_USER_SUCCESS: 'FETCH_AUTH_USER_SUCCESS',
   FETCH_AUTH_USER_FAIL: 'FETCH_AUTH_USER_FAIL',
 
+  FETCH_ALL_USERS_SUCCESS: 'FETCH_ALL_USERS_SUCCESS',
+
   LOGIN_USER: 'LOGIN_USER',
   LOGIN_USER_SUCCESS: 'LOGIN_USER_SUCCESS',
   LOGIN_USER_FAIL: 'LOGIN_USER_FAIL',
@@ -33,6 +35,10 @@ export const fetchAuthUserAC = () => ({
 export const fetchAuthUserSuccessAC = (user) => ({
   type: userActions.FETCH_AUTH_USER_SUCCESS,
   payload: user,
+});
+export const fetchAllUsersSuccessAC = (users) => ({
+  type: userActions.FETCH_ALL_USERS_SUCCESS,
+  payload: users,
 });
 export const fetchAuthUserFailAC = (errorMessage) => ({
   type: userActions.FETCH_AUTH_USER_FAIL,

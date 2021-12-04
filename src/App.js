@@ -9,7 +9,6 @@ import Sidebar from './common/components/layout/Sidebar';
 import Toolbar from './common/components/layout/Toolbar';
 import React from 'react';
 import { PrivateRoute } from './hoc/PrivateRoute';
-import Formular from './Folmular';
 function App(props) {
   return (
     <div className="landing">
@@ -26,7 +25,6 @@ function App(props) {
         </Switch>
         <Notification />
       </BrowserRouter>
-      {/* <Formular /> */}
     </div>
   );
 }

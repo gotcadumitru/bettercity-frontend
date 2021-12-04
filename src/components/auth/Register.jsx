@@ -41,9 +41,11 @@ const Register = (props) => {
       handleRegisterData(initialRegisterData);
       history.push('/');
     }
+    // eslint-disable-next-line
   }, [registerNewUser]);
   useEffect(() => {
     return () => dispatch(resetAuthDataAC());
+    // eslint-disable-next-line
   }, []);
   const [registerData, handleRegisterData] = useState({ ...initialRegisterData });
 

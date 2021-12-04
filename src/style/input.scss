@@ -23,10 +23,10 @@
   }
   &__label {
     text-transform: capitalize;
-    font-weight: 500;
     font-family: $roboto;
     font-size: 16px;
     margin-top: 15px;
+    font-weight: 700;
     margin-bottom: 7px;
   }
   &__error {
@@ -34,5 +34,8 @@
     font-family: $roboto;
     font-size: 12px;
     margin-top: 5px;
+    &--center {
+      text-align: center;
+    }
   }
 }

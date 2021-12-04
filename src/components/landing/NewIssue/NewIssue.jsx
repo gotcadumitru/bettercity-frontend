@@ -1,30 +1,174 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiImageAdd } from 'react-icons/bi';
 import { MdOutlineCameraEnhance } from 'react-icons/md';
+import Input from '../../../common/components/common/Input';
 import Modal from '../../../common/components/common/Modal';
+import TextArea from '../../../common/components/common/TextArea';
 import WebcamCapture from '../../../common/components/common/WebCam';
+import { timisoaraZones, timisoareRegions } from '../../../common/defaults/defaults.map';
+import { isPoinInside } from '../../../common/helpers/checkIsPointInside';
+import { toBase64 } from '../../../common/helpers/toBase64';
+import GoogleMap from '../maps/GoogleMap';
+import Geocode from 'react-geocode';
+import { ISSUE_PRIORITY } from '../../../common/defaults/defaults.issue';
+import { useDispatch } from 'react-redux';
+import { addNewIssueThunk } from '../../../common/state/thunk/issue.thunk';
+import { useSelector } from 'react-redux';
+import { FetchStatus } from '../../../common/state/reducer/user.reducer';
+import { handleIsNotificationShowAC } from '../../../common/state/action/notification.action';
+import { useHistory } from 'react-router';
+import { resetNewIssueStatusAC } from '../../../common/state/action/issue.action';
+Geocode.setApiKey('AIzaSyDRvC6Q5uvEzTFo_CB0RiegSYQ-PxNNUEc');
+Geocode.setLanguage('en');
+Geocode.setRegion('ro');
 const NewIssue = ({ ...props }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const addIssueStatus = useSelector((state) => state.issue.addIssueStatus);
   const [issueData, setIssueData] = useState({
     images: {
       value: [],
-      errorMassage: '',
+      errorMessage: '',
     },
     type: {
       value: '',
-      errorMassage: '',
+      errorMessage: '',
+    },
+    title: {
+      value: '',
+      errorMessage: '',
+    },
+    description: {
+      value: '',
+      errorMessage: '',
     },
     zone: {
-      value: '',
-      errorMassage: '',
+      value: {
+        lat: null,
+        lng: null,
+        adress: '',
+      },
+      errorMessage: '',
     },
     priority: {
-      value: '',
-      errorMassage: '',
+      value: ISSUE_PRIORITY[0],
+      errorMessage: '',
     },
   });
   const [isCameraOn, handleIsCameraOn] = useState(false);
-  const handlePhoto = (e) => {
-    setIssueData({ ...issueData, images: { value: e.target.files } });
+  const [isMapOpen, handleIsMapOpen] = useState(false);
+  useEffect(() => {
+    if (addIssueStatus === FetchStatus.SUCCESS) {
+      dispatch(handleIsNotificationShowAC(true, false, 'Issue added successfully'));
+      dispatch(resetNewIssueStatusAC());
+      history.push('/issues');
+    }
+    // eslint-disable-next-line
+  }, [addIssueStatus]);
+  const handlePhoto = async (e) => {
+    const images = await Promise.all(
+      Array.from(e.target.files).map(async (file) => ({
+        name: file.name,
+        image: await toBase64(file),
+      }))
+    );
+    setIssueData({
+      ...issueData,
+      images: {
+        value: [...issueData.images.value, ...images],
+      },
+    });
+  };
+  const removeImage = (index) => {
+    setIssueData({
+      ...issueData,
+      images: {
+        value: issueData.images.value.filter((_, i) => i !== index),
+      },
+    });
+  };
+
+  const handleChangeInput = (e) => {
+    setIssueData({
+      ...issueData,
+      [e.target.name]: {
+        value: e.target.value,
+      },
+    });
+  };
+
+  const handleMapCoord = async ([lat, lng]) => {
+    const zone = timisoaraZones.find((zon) =>
+      isPoinInside(
+        [lat, lng],
+        zon.coo.map((no) => {
+          const co = timisoareRegions.find((m) => m.text === no);
+          return [co.lat, co.lng];
+        })
+      )
+    );
+    if (!zone)
+      return setIssueData({
+        ...issueData,
+        zone: {
+          value: {
+            lat: null,
+            lng: null,
+            adress: '',
+          },
+          errorMessage: 'There is no area in Timisoara with these coordinates',
+        },
+      });
+    const response = await Geocode.fromLatLng(lat, lng);
+    const adress = zone.name + ', ' + response.results[0].formatted_address;
+
+    setIssueData({
+      ...issueData,
+      zone: {
+        value: {
+          lat,
+          lng,
+          adress,
+        },
+      },
+    });
+  };
+
+  const checkIfExistErrors = () => {
+    let isErrors = false;
+    let issueDataCopy = { ...issueData };
+    if (!issueDataCopy.description.value.length) {
+      issueDataCopy.description.errorMessage = 'This field is required';
+      isErrors = true;
+    }
+    if (!issueDataCopy.title.value.length) {
+      issueDataCopy.title.errorMessage = 'This field is required';
+      isErrors = true;
+    }
+    if (!issueDataCopy.zone.value.adress.length) {
+      issueDataCopy.zone.errorMessage = 'This field is required';
+      isErrors = true;
+    }
+    if (isErrors) {
+      setIssueData(issueDataCopy);
+    }
+    return isErrors;
+  };
+  const handleSubmit = () => {
+    if (checkIfExistErrors()) return;
+    dispatch(
+      addNewIssueThunk({
+        title: issueData.title.value,
+        description: issueData.description.value,
+        zone: issueData.zone.value.adress.split(',')[0],
+        address: issueData.zone.value.adress,
+        type: issueData.type.value,
+        priority: issueData.priority.value,
+        lat: issueData.zone.value.lat,
+        lng: issueData.zone.value.lng,
+        pictures: issueData.images.value.map((img) => img.image.split('base64,')[1]),
+      })
+    );
   };
   return (
     <div className="section">
@@ -49,13 +193,24 @@ const NewIssue = ({ ...props }) => {
               <MdOutlineCameraEnhance className="new-issue__images-icon" />
             </div>
           </div>
-
           {Array.from(issueData.images.value).map((image, index) => (
-            <div key={image.name + index} className="new-issue__image-name">
-              {index + 1}.{image.name}
+            <div key={image.name + index}>
+              <div className="new-issue__image-name">
+                <span className="new-issue__image-name-text">
+                  {index + 1}.{image.name}
+                </span>
+                <span
+                  onClick={() => {
+                    removeImage(index);
+                  }}
+                  className="new-issue__remove-img"
+                >
+                  X
+                </span>
+              </div>
+              <img className="new-issue__photo" src={image.image} alt={image.name} />
             </div>
           ))}
-
           {isCameraOn && (
             <Modal isOpen={isCameraOn} handleModalStatus={(newStatus) => handleIsCameraOn(newStatus)}>
               <WebcamCapture
@@ -66,8 +221,9 @@ const NewIssue = ({ ...props }) => {
                     ...issueData,
                     images: {
                       value: [
+                        ...issueData.images.value,
                         {
-                          name: 'new-image.jpeg',
+                          name: new Date().getTime() + '-image.jpeg',
                           image,
                         },
                       ],
@@ -77,6 +233,70 @@ const NewIssue = ({ ...props }) => {
               />
             </Modal>
           )}
+          <Input
+            name="title"
+            inputLabel="Title:"
+            placeholder="New issue title..."
+            errorMessage={issueData.title.errorMessage}
+            value={issueData.title.value}
+            onChange={handleChangeInput}
+          />
+          <TextArea
+            name="description"
+            inputLabel="Description:"
+            placeholder="Issue description..."
+            value={issueData.description.value}
+            onChange={handleChangeInput}
+            errorMessage={issueData.description.errorMessage}
+          />
+
+          <div className="input__label">Type:</div>
+          <select className="input" onChange={handleChangeInput} name="type" value={issueData.type.value}>
+            {[
+              { id: 0, name: 0 },
+              { id: 1, name: 1 },
+              { id: 2, name: 2 },
+            ].map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+
+          <div className="input__label">Priority:</div>
+          <select className="input" onChange={handleChangeInput} name="priority" value={issueData.priority.value}>
+            {ISSUE_PRIORITY.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
+          <Input
+            inputLabel="Select zone"
+            placeholder="Click here to select on map"
+            onFocus={() => handleIsMapOpen(true)}
+            onChange={() => {}}
+            value={issueData.zone.value.adress}
+            className="input"
+            errorMessage={issueData.zone.errorMessage}
+          />
+          {isMapOpen && (
+            <Modal isOpen={isMapOpen} handleModalStatus={(newStatus) => handleIsMapOpen(newStatus)}>
+              <GoogleMap
+                onChange={handleMapCoord}
+                height="500px"
+                markers={
+                  issueData.zone.value.lat !== null ? [{ lat: issueData.zone.value.lat, lng: issueData.zone.value.lng, text: '+' }] : []
+                }
+              />
+              {issueData.zone.errorMessage && <div className="input__error input__error--center">{issueData.zone.errorMessage}</div>}
+              <div className="input__label">{issueData.zone.value.adress}</div>
+            </Modal>
+          )}
+          <button onClick={handleSubmit} className="button button--m-top">
+            Add
+          </button>
         </div>
       </div>
     </div>

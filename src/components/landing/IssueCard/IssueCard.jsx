@@ -6,6 +6,7 @@ const ISSUE_STATUS_COLOR = {
   [ISSUE_STATUS.IN_PROGRESS]: '#0074d9',
   [ISSUE_STATUS.RESOLVED]: '#2ecc40',
   [ISSUE_STATUS.REJECTED]: '#ff4136',
+  [ISSUE_STATUS.NOT_ASSIGNED]: '#111',
 };
 const IssueCard = ({ image, title, likes, status, description, id, ...props }) => {
   return (

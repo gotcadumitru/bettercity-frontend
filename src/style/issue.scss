@@ -1,13 +1,14 @@
 .issue-card {
   height: 400px;
-  width: 315px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
   overflow: hidden;
   background-color: $white;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-
+  margin-left: 30px;
+  margin-bottom: 30px;
   &__image {
     width: 100%;
     height: 190px;
@@ -43,6 +44,7 @@
     justify-content: space-between;
     align-items: center;
     grid-template-columns: repeat(3, calc(100% / 3));
+    margin: auto 0 20px 0;
   }
   &__likes {
     display: flex;
@@ -70,6 +72,8 @@
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
   border-radius: 8px;
   background-color: $white;
   padding: 16px;
@@ -95,9 +99,22 @@
     font-weight: 700;
     margin-bottom: 5px;
   }
+  &__image-name-text {
+    text-overflow: ellipsis;
+    max-width: 30ch;
+    overflow: hidden;
+  }
   &__image-name {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
     font-size: 16px;
     font-weight: 700;
+    margin-top: 5px;
+  }
+  &__remove-img {
+    cursor: pointer;
   }
   &__photo {
     max-width: 300px;

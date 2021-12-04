@@ -4,6 +4,7 @@ import {
   confirmRegistartionAC,
   confirmRegistartionFailAC,
   confirmRegistartionSuccessAC,
+  fetchAllUsersSuccessAC,
   fetchAuthUserAC,
   fetchAuthUserFailAC,
   fetchAuthUserSuccessAC,
@@ -33,6 +34,14 @@ export const fetchAuthUserThunk = () => async (dispatch) => {
   } catch (err) {
     authToken.removeToken();
     dispatch(fetchAuthUserFailAC('Error'));
+  }
+};
+export const fetchAllUsersThunk = () => async (dispatch) => {
+  try {
+    const response = await authAPI.getAllUsers();
+    dispatch(fetchAllUsersSuccessAC(response.data));
+  } catch (err) {
+    console.log(err);
   }
 };
 export const registerNewUserThunk = (value) => async (dispatch) => {

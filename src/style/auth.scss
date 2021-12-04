@@ -21,29 +21,10 @@
     font-size: 14px;
     text-transform: capitalize;
   }
-  &__google-logo {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-  }
   &__sigh-up-with {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
-  }
-  &__facebook {
-    background-color: $fb;
-    font-size: 14px;
-    height: 36px;
-    border-radius: 5px;
-    padding: 0 19px;
-    color: $white;
-    display: flex;
-    align-items: center;
-    text-transform: capitalize;
-    svg {
-      margin-right: 10px;
-    }
   }
   &__or {
     text-align: center;

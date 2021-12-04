@@ -22,9 +22,11 @@ const ForgotPassword = (props) => {
     if (forgotPassword.fetchStatus === FetchStatus.SUCCESS || forgotPassword.fetchStatus === FetchStatus.FAIL) {
       dispatch(handleIsNotificationShowAC(true, forgotPassword.fetchStatus === FetchStatus.FAIL, forgotPassword.message));
     }
+    // eslint-disable-next-line
   }, [forgotPassword]);
   useEffect(() => {
     return () => dispatch(resetAuthDataAC());
+    // eslint-disable-next-line
   }, []);
   const handleSubmit = (e) => {
     if (checkIfExistErrors()) return;

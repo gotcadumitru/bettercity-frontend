@@ -9,6 +9,7 @@ const WebcamCapture = ({ onChange, imgSrc, ...props }) => {
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     onChange(imageSrc);
+    // eslint-disable-next-line
   }, [webcamRef]);
   const handleClick = React.useCallback(() => {
     setFacingMode((prevState) => (prevState === FACING_MODE_USER ? FACING_MODE_ENVIRONMENT : FACING_MODE_USER));
