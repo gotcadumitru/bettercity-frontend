@@ -154,6 +154,13 @@ const NewIssue = ({ ...props }) => {
     }
     return isErrors;
   };
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        handleMapCoord([position.coords.latitude, position.coords.longitude]);
+      });
+    }
+  }
   const handleSubmit = () => {
     if (checkIfExistErrors()) return;
     dispatch(
@@ -275,14 +282,21 @@ const NewIssue = ({ ...props }) => {
           <Input
             inputLabel="Select zone"
             placeholder="Click here to select on map"
-            onFocus={() => handleIsMapOpen(true)}
+            onFocus={(e) => {
+              e.target.blur();
+              handleIsMapOpen(true);
+            }}
             onChange={() => {}}
             value={issueData.zone.value.adress}
             className="input"
             errorMessage={issueData.zone.errorMessage}
           />
           {isMapOpen && (
-            <Modal isOpen={isMapOpen} handleModalStatus={(newStatus) => handleIsMapOpen(newStatus)}>
+            <Modal
+              isOpen={isMapOpen}
+              containerClassName="c-modal__container--map"
+              handleModalStatus={(newStatus) => handleIsMapOpen(newStatus)}
+            >
               <GoogleMap
                 onChange={handleMapCoord}
                 height="500px"
@@ -290,6 +304,9 @@ const NewIssue = ({ ...props }) => {
                   issueData.zone.value.lat !== null ? [{ lat: issueData.zone.value.lat, lng: issueData.zone.value.lng, text: '+' }] : []
                 }
               />
+              <button className="button button--m-top" onClick={getLocation}>
+                Use my geolocation
+              </button>
               {issueData.zone.errorMessage && <div className="input__error input__error--center">{issueData.zone.errorMessage}</div>}
               <div className="input__label">{issueData.zone.value.adress}</div>
             </Modal>
