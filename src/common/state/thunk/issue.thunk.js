@@ -13,7 +13,7 @@ export const addNewIssueThunk = (data) => async (dispatch) => {
 export const fetchAllIssuesThunk = (data) => async (dispatch) => {
   try {
     const response = await otherAPI.getAllIssues();
-    dispatch(fetchAllIssuesSuccessAC(response.data));
+    dispatch(fetchAllIssuesSuccessAC(response.data ? response.data : []));
   } catch (err) {
     console.log(err);
   }
