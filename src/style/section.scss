@@ -1,7 +1,12 @@
 .section {
   width: 100%;
   min-height: 100%;
-  padding: 0 30px;
+  padding: 0 30px 30px 30px;
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: $rubik;
+  }
   &__header {
     display: flex;
     width: 100%;
@@ -11,6 +16,10 @@
       justify-content: space-between;
     }
   }
+  &__body {
+    margin-top: 20px;
+  }
+  background-image: url();
 }
 
 .user-table {

@@ -1,2 +1,112 @@
 .issue-card {
+  height: 400px;
+  width: 315px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: $white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+  &__image {
+    width: 100%;
+    height: 190px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  &__body {
+    padding: 20px;
+  }
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: $rubik;
+  }
+  &__description {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: $roboto;
+    text-align: justify;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    -webkit-box-orient: vertical;
+  }
+  &__footer {
+    display: grid;
+    width: 100%;
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: repeat(3, calc(100% / 3));
+  }
+  &__likes {
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }
+  &__status {
+    text-align: center;
+  }
+  &__like-icon {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  &__link {
+    text-align: right;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.new-issue {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  border-radius: 8px;
+  background-color: $white;
+  padding: 16px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  &__images-icon {
+    font-size: 100px;
+    cursor: pointer;
+  }
+  input[type='file'] {
+    display: none;
+  }
+  &__images {
+    display: flex;
+    align-items: center;
+  }
+  &__or {
+    margin: 0 30px;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  &__image-label {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  &__image-name {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  &__photo {
+    max-width: 300px;
+  }
+  &__select-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 }

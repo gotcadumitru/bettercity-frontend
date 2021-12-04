@@ -31,7 +31,6 @@ export const fetchAuthUserThunk = () => async (dispatch) => {
       throw new Error('No auth token');
     }
   } catch (err) {
-    console.log(err);
     authToken.removeToken();
     dispatch(fetchAuthUserFailAC('Error'));
   }
@@ -56,7 +55,6 @@ export const loginThunk = (value) => async (dispatch) => {
     dispatch(fetchAuthUserThunk());
   } catch (error) {
     dispatch(loginUserFailAC(error.response.data.message));
-    console.log(error);
   }
 };
 export const forgotPasswordThunk = (email) => async (dispatch) => {

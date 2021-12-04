@@ -26,7 +26,7 @@ function App(props) {
         </Switch>
         <Notification />
       </BrowserRouter>
-      <Formular />
+      {/* <Formular /> */}
     </div>
   );
 }

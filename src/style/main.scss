@@ -19,14 +19,9 @@
   display: flex;
   width: 100%;
   min-height: 100vh;
-  position: relative;
   background-color: $grey-dark;
-
+  justify-content: flex-end;
   &__container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
     flex-direction: column;
     width: calc(100% - 250px);
   }
@@ -47,4 +42,9 @@
 }
 *::-webkit-scrollbar-track {
   background: $grey-dark;
+}
+
+.web-camera {
+  display: flex;
+  flex-direction: column;
 }
