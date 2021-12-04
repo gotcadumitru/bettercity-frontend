@@ -4,6 +4,7 @@ import { FetchStatus } from './user.reducer';
 const initialState = {
   addIssueStatus: FetchStatus.NULL,
   allIssues: [],
+  issue: null,
 };
 
 const issueReducer = (state = initialState, action) => {
@@ -24,6 +25,12 @@ const issueReducer = (state = initialState, action) => {
       return {
         ...initialState,
         allIssues: action.payload,
+      };
+    }
+    case issueActions.FETCH_SINGLE_ISSUE_SUCCESS: {
+      return {
+        ...initialState,
+        issue: action.payload,
       };
     }
     default:

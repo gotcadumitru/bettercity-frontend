@@ -3,6 +3,8 @@ export const issueActions = {
   RESET_NEW_ISSUE_STATUS: 'RESET_NEW_ISSUE_STATUS',
 
   FETCH_ALL_ISSUES_SUCCESS: 'FETCH_ALL_ISSUES_SUCCESS',
+
+  FETCH_SINGLE_ISSUE_SUCCESS: 'FETCH_SINGLE_ISSUE_SUCCESS',
 };
 
 export const createNewIssueSuccessAC = () => ({
@@ -15,4 +17,9 @@ export const resetNewIssueStatusAC = () => ({
 export const fetchAllIssuesSuccessAC = (allIssues) => ({
   type: issueActions.FETCH_ALL_ISSUES_SUCCESS,
   payload: allIssues,
+});
+
+export const fetchSingleIssueSuccessAC = (issue) => ({
+  type: issueActions.FETCH_SINGLE_ISSUE_SUCCESS,
+  payload: issue,
 });

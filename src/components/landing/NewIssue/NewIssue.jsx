@@ -270,15 +270,6 @@ const NewIssue = ({ ...props }) => {
             ))}
           </select>
 
-          <div className="input__label">Priority:</div>
-          <select className="input" onChange={handleChangeInput} name="priority" value={issueData.priority.value}>
-            {ISSUE_PRIORITY.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-
           <Input
             inputLabel="Select zone"
             placeholder="Click here to select on map"

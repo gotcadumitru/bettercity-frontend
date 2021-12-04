@@ -1,5 +1,5 @@
 import { otherAPI } from '../../../api/api';
-import { createNewIssueSuccessAC, fetchAllIssuesSuccessAC } from '../action/issue.action';
+import { createNewIssueSuccessAC, fetchAllIssuesSuccessAC, fetchSingleIssueSuccessAC } from '../action/issue.action';
 
 export const addNewIssueThunk = (data) => async (dispatch) => {
   try {
@@ -10,10 +10,19 @@ export const addNewIssueThunk = (data) => async (dispatch) => {
   }
 };
 
-export const fetchAllIssuesThunk = (data) => async (dispatch) => {
+export const fetchAllIssuesThunk = () => async (dispatch) => {
   try {
     const response = await otherAPI.getAllIssues();
     dispatch(fetchAllIssuesSuccessAC(response.data ? response.data : []));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const fetchSingleIssueThunk = (id) => async (dispatch) => {
+  try {
+    const response = await otherAPI.getIssue(id);
+    dispatch(fetchSingleIssueSuccessAC(response.data));
   } catch (err) {
     console.log(err);
   }

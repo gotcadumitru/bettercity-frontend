@@ -84,4 +84,11 @@ export const otherAPI = {
       },
     });
   },
+  async getIssue(id) {
+    return instance.get(`/issues/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + authToken.getToken(),
+      },
+    });
+  },
 };
