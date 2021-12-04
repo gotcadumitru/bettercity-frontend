@@ -1,0 +1,38 @@
+.input {
+  border-radius: 28px;
+  font-size: 14px;
+  background-color: $white;
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: solid 1px $navy;
+  font-size: 16px;
+  color: $navy;
+  font-family: $roboto;
+  width: 100%;
+  &--error {
+    border: solid 1px $red;
+  }
+  &:focus-visible {
+    border: solid 1px $navy;
+    outline: none;
+  }
+
+  &::placeholder {
+    font-family: $roboto;
+    color: $grey;
+  }
+  &__label {
+    text-transform: capitalize;
+    font-weight: 500;
+    font-family: $roboto;
+    font-size: 16px;
+    margin-top: 15px;
+    margin-bottom: 7px;
+  }
+  &__error {
+    color: $red;
+    font-family: $roboto;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+}

@@ -1,0 +1,69 @@
+.auth {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__container {
+    width: 100%;
+    background-color: $grey-light;
+    max-width: 500px;
+    padding: 24px;
+    border-radius: 4px;
+  }
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &__google-text {
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+  &__google-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  &__sigh-up-with {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  &__facebook {
+    background-color: $fb;
+    font-size: 14px;
+    height: 36px;
+    border-radius: 5px;
+    padding: 0 19px;
+    color: $white;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    svg {
+      margin-right: 10px;
+    }
+  }
+  &__or {
+    text-align: center;
+    margin: 10px 0;
+    margin-top: 20px;
+  }
+  &__agree {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  &__agree-text {
+    margin-left: 10px;
+  }
+  &__links {
+    text-align: end;
+  }
+  &__confirm-registration {
+    padding: 30px;
+    text-align: center;
+  }
+}

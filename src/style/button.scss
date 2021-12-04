@@ -1,0 +1,21 @@
+.button {
+  padding: 7px 19px;
+  border-radius: 5px;
+  background-color: $black;
+  font-family: $rubik;
+  font-size: 20px;
+  color: $white;
+  cursor: pointer;
+  text-decoration: none;
+  min-width: fit-content;
+  height: 36px;
+  &--m-left {
+    margin-left: 15px;
+  }
+  &--disabled {
+    background-color: $grey;
+    color: $white;
+    cursor: default;
+    pointer-events: none;
+  }
+}

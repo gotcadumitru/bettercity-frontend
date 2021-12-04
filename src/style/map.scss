@@ -1,0 +1,25 @@
+.c-map {
+  width: 100%;
+  &__region-no {
+    fill: $grey-9;
+    cursor: pointer;
+  }
+  &__region {
+    cursor: pointer;
+    fill: $grey-c;
+    stroke: $grey-b;
+    stroke-width: 0.5px;
+    &--active {
+      fill: $grey;
+    }
+  }
+}
+
+.google-map {
+  &__marker {
+    width: 100px;
+    min-height: 100px;
+    color: red;
+    font-size: 16px;
+  }
+}

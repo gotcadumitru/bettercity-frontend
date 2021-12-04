@@ -1,0 +1,43 @@
+@import './variables.scss';
+@import './auth.scss';
+@import './input.scss';
+@import './button.scss';
+@import './textarea.scss';
+@import './modal.scss';
+@import './notification.scss';
+@import './map.scss';
+@import './sidebar.scss';
+@import './toolbar.scss';
+@import './section.scss';
+.empty-page {
+  width: 100vw;
+  height: 100vh;
+  background-color: $grey-dark;
+}
+.main-page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: $grey-dark;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 250px);
+  }
+}
+
+*::-webkit-scrollbar {
+  -webkit-appearance: none;
+  height: 7px;
+  width: 7px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: $grey;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  padding-left: 20px;
+}
+*::-webkit-scrollbar-track {
+  background: $grey-dark;
+}
