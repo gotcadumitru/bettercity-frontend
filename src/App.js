@@ -9,15 +9,16 @@ import Sidebar from './common/components/layout/Sidebar';
 import Toolbar from './common/components/layout/Toolbar';
 import React from 'react';
 import { PrivateRoute } from './hoc/PrivateRoute';
+import Formular from './Folmular';
 function App(props) {
   return (
-    <div className="main-page">
+    <div className="landing">
       <BrowserRouter>
         <Switch>
           <AuthPrivateRoute path="/auth" component={AuthPage} />
           <PrivateRoute path="/">
             <Sidebar />
-            <div className="main-page__container">
+            <div className="landing__container">
               <Toolbar />
               <MainPage />
             </div>
@@ -25,6 +26,7 @@ function App(props) {
         </Switch>
         <Notification />
       </BrowserRouter>
+      <Formular />
     </div>
   );
 }
