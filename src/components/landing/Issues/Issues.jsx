@@ -20,13 +20,14 @@ const Issues = ({ ...props }) => {
     };
     return <Input placeholder="Search..." onChange={handleChangeInput} />;
   };
+  const isUserAuthentificated = !!authToken.getToken();
   const handleNewButton = () => {
-    const onButtonClick = (e) => {};
+    if (!isUserAuthentificated) {
+      return <div />;
+    }
     return (
-      <Link to={authToken.getToken() ? '/auth/login' : '/issues/new'}>
-        <button className="button" onChange={onButtonClick}>
-          + New Issue
-        </button>
+      <Link to={!authToken.getToken() ? '/auth/login' : '/issues/new'}>
+        <button className="button">+ New Issue</button>
       </Link>
     );
   };
