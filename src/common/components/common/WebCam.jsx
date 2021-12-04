@@ -12,7 +12,7 @@ const WebcamCapture = ({ onChange, imgSrc, ...props }) => {
   return (
     <>
       <div className={'web-camera'}>
-        <Webcam audio={false} ref={webcamRef} videoConstraints={{ facingMode: 'user' }} screenshotFormat="image/jpeg" />
+        <Webcam audio={false} ref={webcamRef} videoConstraints={{ facingMode: { exact: 'environment' } }} screenshotFormat="image/jpeg" />
         <button className="button" onClick={capture}>
           Capture photo
         </button>
