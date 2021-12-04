@@ -19,6 +19,7 @@
   &__body {
     margin-top: 20px;
     &--issues {
+      margin-left: -30px;
       display: grid;
       grid-template-columns: repeat(5, calc(20% - 30px));
       column-gap: 30px;
