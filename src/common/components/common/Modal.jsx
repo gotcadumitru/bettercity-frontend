@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import useClickOutside from '../../helpers/useClickOutside';
+import useClickOutside from '../../hooks/useClickOutside';
 
 const Modal = ({ isOpen, handleModalStatus, ...props }) => {
   const modalRef = useRef(null);
@@ -12,7 +12,7 @@ const Modal = ({ isOpen, handleModalStatus, ...props }) => {
 
   return (
     <div className={`c-modal ${isOpen ? 'c-modal--open' : ''}`}>
-      <div ref={modalRef} className='c-modal__container '>
+      <div ref={modalRef} className="c-modal__container ">
         {props.children}
       </div>
     </div>

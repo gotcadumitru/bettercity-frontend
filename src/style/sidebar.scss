@@ -6,6 +6,10 @@
   position: fixed;
   top: 0;
   left: 0;
+  transition: left 0.3s linear;
+  &--close {
+    left: -100%;
+  }
   &__logo {
     display: block;
     width: calc(100% - 50px);
@@ -36,5 +40,58 @@
   }
   &__icon {
     margin-right: 15px;
+  }
+}
+.burger {
+  position: fixed;
+  padding: 5px;
+  display: block;
+  width: 40px;
+  height: 36px;
+  top: 10px;
+  left: 10px;
+  opacity: 0;
+  visibility: hidden;
+  background-color: $white;
+  border-radius: 3px;
+  cursor: pointer;
+  &-lines {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 4px;
+    background-color: $black;
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 4px;
+      margin-top: 7px;
+      background-color: $black;
+    }
+    &::before {
+      margin-top: 11px;
+    }
+  }
+  &--active {
+    left: auto;
+    right: 0px;
+    top: 0px;
+
+    .burger-lines {
+      transform: rotate(45deg);
+      margin-top: 10px;
+      &::before {
+        display: none;
+      }
+      &::after {
+        transform: rotate(90deg) translateX(-7px);
+      }
+    }
+  }
+  @media screen and (max-width: 800px) {
+    visibility: initial;
+    opacity: 1;
   }
 }

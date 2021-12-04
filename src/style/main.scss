@@ -24,6 +24,9 @@
   &__container {
     flex-direction: column;
     width: calc(100% - 250px);
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
   }
 }
 *::-webkit-scrollbar {
