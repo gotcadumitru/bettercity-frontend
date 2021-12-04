@@ -11,13 +11,17 @@ import useWindowSize from '../../hooks/useWindowSize';
 import useClickOutside from '../../hooks/useClickOutside';
 const Sidebar = (props) => {
   const location = useLocation().pathname.split('/')[1];
-  const isAdmin = !useSelector((state) => state.profileInfo.user.data.role === 'admin');
-  const [isSidebarOpen, handleIsSidebarOpen] = useState(true);
+  const isAdmin = !useSelector((state) => state.profileInfo.user?.data?.role === 'admin');
+  const [isSidebarOpen, handleIsSidebarOpen] = useState(window.innerWidth > 800);
   const { width } = useWindowSize();
   const sidebarRef = useRef();
   useEffect(() => {
     if (width < 800) {
       handleIsSidebarOpen(false);
+    }
+
+    if (width >= 800) {
+      handleIsSidebarOpen(true);
     }
   }, [width]);
   const navItems = [
@@ -27,9 +31,13 @@ const Sidebar = (props) => {
     { Icon: BiMapAlt, name: 'map', forAdmin: false },
   ];
 
-  useClickOutside(sidebarRef, () => handleIsSidebarOpen(false));
+  useClickOutside(sidebarRef, () => {
+    if (width < 800) {
+      handleIsSidebarOpen(false);
+    }
+  });
   return (
-    <div ref={sidebarRef} className={`sidebar ${width < 800 ? (isSidebarOpen ? 'sidebar--open' : 'sidebar--close') : ''}`}>
+    <div ref={sidebarRef} className={`sidebar ${isSidebarOpen ? 'sidebar--open' : 'sidebar--close'}`}>
       <img className="sidebar__logo" src={logo} alt="BETTER CITY" />
       <hr className="sidebar__line" />
       {!isSidebarOpen && (

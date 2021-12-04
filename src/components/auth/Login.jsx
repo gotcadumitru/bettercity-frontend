@@ -26,7 +26,7 @@ const Login = (props) => {
       dispatch(handleIsNotificationShowAC(true, true, login.message));
     }
     if (login.fetchStatus === FetchStatus.SUCCESS) {
-      history.push('/');
+      history.push('/issues');
     }
     // eslint-disable-next-line
   }, [login]);

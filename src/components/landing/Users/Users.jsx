@@ -28,7 +28,7 @@ const Users = ({ ...props }) => {
           <div className="user-table__header-item">Raported Issues</div>
         </div>
         {allUsers
-          .filter((user) => `${user.email} ${user.name} ${user.role}`.toLowerCase().includes(inputData.toLowerCase()))
+          .filter((user) => `${user.email} ${user.name} ${user?.role}`.toLowerCase().includes(inputData.toLowerCase()))
           .map((user) => (
             <div key={user.id} className="user-table__row">
               <div className="user-table__row-content">

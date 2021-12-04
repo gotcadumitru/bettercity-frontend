@@ -18,14 +18,14 @@
   }
   &__body {
     display: flex;
-    width: 100%;
+    max-width: 100%;
     justify-content: space-between;
     align-items: center;
   }
   transform: translateX(-50%);
   transition: bottom linear 0.3s;
   &__message {
-    width: 400px;
+    max-width: 100%;
     margin-left: 10px;
     color: $white;
     font-size: 16px;

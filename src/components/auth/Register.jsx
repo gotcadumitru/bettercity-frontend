@@ -39,7 +39,7 @@ const Register = (props) => {
     }
     if (registerNewUser.registerFetchStatus === FetchStatus.SUCCESS) {
       handleRegisterData(initialRegisterData);
-      history.push('/');
+      history.push('/issues');
     }
     // eslint-disable-next-line
   }, [registerNewUser]);

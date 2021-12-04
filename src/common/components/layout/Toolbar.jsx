@@ -19,7 +19,7 @@ const Toolbar = (props) => {
               dispatch(logOutThunk());
             }}
             className="toolbar__item"
-            to="/"
+            to="/issues"
           >
             Logout
           </Link>

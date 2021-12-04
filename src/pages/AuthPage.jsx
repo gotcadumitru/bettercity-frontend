@@ -12,7 +12,7 @@ const AuthPage = (props) => {
   const history = useHistory();
   useEffect(() => {
     if (userFetchStatus === FetchStatus.SUCCESS) {
-      history.push('/');
+      history.push('/issues');
     }
     // eslint-disable-next-line
   }, [userFetchStatus]);

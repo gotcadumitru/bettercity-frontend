@@ -180,7 +180,7 @@ const NewIssue = ({ ...props }) => {
         <div className="new-issue">
           <div className="new-issue__images">
             <div className="new-issue__select-images">
-              <label htmlFor="issue-image-upload">
+              <label htmlFor="issue-image-upload" className="new-issue__label">
                 <div className="new-issue__image-label">Select images</div>
                 <BiImageAdd className="new-issue__images-icon" />
               </label>
