@@ -24,7 +24,7 @@ const SvgMap = () => {
   };
 
   return (
-    <div className="section">
+    <div className="section section--map">
       <div className="section__title">{timisoaraZones.find((zone) => zone.id === hoveredRegion)?.name}</div>
       <div className="section__title">
         Issues:
