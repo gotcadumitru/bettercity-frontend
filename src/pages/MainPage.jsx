@@ -25,7 +25,7 @@ const MainPage = (props) => {
         <Route exact path="/map">
           <SvgMap />
         </Route>
-        <Route exact path="/statistics">
+        <Route exact path="/dashboard">
           <Statistics />
         </Route>
       </Switch>

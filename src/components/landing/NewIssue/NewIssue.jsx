@@ -88,20 +88,20 @@ const NewIssue = ({ ...props }) => {
         };
       })
     );
-    setIssueData({
-      ...issueData,
+    setIssueData((issueCopy) => ({
+      ...issueCopy,
       images: {
-        value: [...issueData.images.value, ...images],
+        value: [...issueCopy.images.value, ...images],
       },
-    });
+    }));
   };
   const removeImage = (index) => {
-    setIssueData({
-      ...issueData,
+    setIssueData((issueCopy) => ({
+      ...issueCopy,
       images: {
-        value: issueData.images.value.filter((_, i) => i !== index),
+        value: issueCopy.images.value.filter((_, i) => i !== index),
       },
-    });
+    }));
   };
   function ConvertDMSToDD(degrees, minutes, seconds, direction) {
     var dd = degrees + minutes / 60 + seconds / (60 * 60);
@@ -111,12 +111,12 @@ const NewIssue = ({ ...props }) => {
     return dd;
   }
   const handleChangeInput = (e) => {
-    setIssueData({
-      ...issueData,
+    setIssueData((issueCopy) => ({
+      ...issueCopy,
       [e.target.name]: {
         value: e.target.value,
       },
-    });
+    }));
   };
 
   const handleMapCoord = async ([lat, lng]) => {
@@ -246,18 +246,18 @@ const NewIssue = ({ ...props }) => {
                 imgSrc={issueData.images.value}
                 onChange={(image) => {
                   handleIsCameraOn(false);
-                  setIssueData({
-                    ...issueData,
+                  setIssueData((issueCopy) => ({
+                    ...issueCopy,
                     images: {
                       value: [
-                        ...issueData.images.value,
+                        ...issueCopy.images.value,
                         {
                           name: new Date().getTime() + '-image.jpeg',
                           image,
                         },
                       ],
                     },
-                  });
+                  }));
                   getLocation();
                 }}
               />

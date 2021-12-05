@@ -20,8 +20,22 @@ const Statistics = ({ ...props }) => {
   }
   return (
     <div className="section">
-      <div className="section__title">Statistics</div>
+      <div className="section__title">Dashboard</div>
       <div className="section__body section__body--stat">
+        <div className="stat-card">
+          <FaUserClock className="stat-card__icon" />
+          <div className="stat-card__content">
+            <div className="stat-card__title">Most active user:</div>
+            <div className="stat-card__info">{statistics.mostActiveUser.name}</div>
+          </div>
+        </div>
+        <div className="stat-card">
+          <BsCheckCircle className="stat-card__icon" />
+          <div className="stat-card__content">
+            <div className="stat-card__title">Total resolved issues:</div>
+            <div className="stat-card__info">{statistics.totalResolvedIssues}</div>
+          </div>
+        </div>
         <div className="stat-card">
           <GiProgression className="stat-card__icon" />
           <div className="stat-card__content">
@@ -32,17 +46,11 @@ const Statistics = ({ ...props }) => {
         <div className="stat-card">
           <Ri24HoursFill className="stat-card__icon" />
           <div className="stat-card__content">
-            <div className="stat-card__title">Issues Added in the lsat 24 hours:</div>
+            <div className="stat-card__title">Issues added in the last 24 hours:</div>
             <div className="stat-card__info">{statistics.issuesAddedInTheLast24Hours}</div>
           </div>
         </div>
-        <div className="stat-card">
-          <FaUserClock className="stat-card__icon" />
-          <div className="stat-card__content">
-            <div className="stat-card__title">Most active user:</div>
-            <div className="stat-card__info">{statistics.mostActiveUser.name}</div>
-          </div>
-        </div>
+
         <div className="stat-card">
           <MdOutlineDoNotDisturb className="stat-card__icon" />
           <div className="stat-card__content">
@@ -55,13 +63,6 @@ const Statistics = ({ ...props }) => {
           <div className="stat-card__content">
             <div className="stat-card__title">Total issues managed in the app:</div>
             <div className="stat-card__info">{statistics.totalIssuesManagedInTheApp}</div>
-          </div>
-        </div>
-        <div className="stat-card">
-          <BsCheckCircle className="stat-card__icon" />
-          <div className="stat-card__content">
-            <div className="stat-card__title">Total resolved issues:</div>
-            <div className="stat-card__info">{statistics.totalResolvedIssues}</div>
           </div>
         </div>
       </div>

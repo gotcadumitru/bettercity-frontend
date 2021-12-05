@@ -23,11 +23,11 @@ const Sidebar = (props) => {
     }
   }, [width]);
   const navItems = [
+    { Icon: BiStats, name: 'dashboard', forAdmin: false },
     { Icon: FiUsers, name: 'contributors', forAdmin: true },
     { Icon: GoIssueOpened, name: 'issues', forAdmin: false },
-    { Icon: AiOutlineBulb, name: 'suggestions', forAdmin: false },
+    // { Icon: AiOutlineBulb, name: 'suggestions', forAdmin: false },
     { Icon: BiMapAlt, name: 'map', forAdmin: false },
-    { Icon: BiStats, name: 'statistics', forAdmin: false },
   ];
 
   useClickOutside(sidebarRef, () => {

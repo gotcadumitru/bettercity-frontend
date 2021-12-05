@@ -67,7 +67,6 @@ const IssuePage = ({ ...props }) => {
                 className="slider__left-icon"
               />
             </div>
-            <div className="issue-page__data">d</div>
           </div>
         </div>
       </div>
