@@ -5,6 +5,7 @@ const initialState = {
   addIssueStatus: FetchStatus.NULL,
   allIssues: [],
   issue: null,
+  statistics: null,
 };
 
 const issueReducer = (state = initialState, action) => {
@@ -31,6 +32,12 @@ const issueReducer = (state = initialState, action) => {
       return {
         ...initialState,
         issue: action.payload,
+      };
+    }
+    case issueActions.FETCH_STATISTICS: {
+      return {
+        ...initialState,
+        statistics: action.payload,
       };
     }
     default:

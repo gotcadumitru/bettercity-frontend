@@ -5,11 +5,12 @@ import NewIssue from '../components/landing/NewIssue/NewIssue';
 import Users from '../components/landing/Users/Users';
 import SvgMap from '../components/landing/maps/SvgMap';
 import IssuePage from '../components/landing/IssuePage/IssuePage';
+import Statistics from '../components/landing/Statistics/Statistics';
 const MainPage = (props) => {
   return (
     <div className="main-page">
       <Switch>
-        <Route path="/users">
+        <Route path="/contributors">
           <Users />
         </Route>
         <Route exact path="/issues">
@@ -23,6 +24,9 @@ const MainPage = (props) => {
         </Route>
         <Route exact path="/map">
           <SvgMap />
+        </Route>
+        <Route exact path="/statistics">
+          <Statistics />
         </Route>
       </Switch>
     </div>

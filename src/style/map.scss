@@ -1,5 +1,7 @@
 .c-map {
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   &__region-no {
     fill: $grey-9;
     cursor: pointer;
@@ -10,7 +12,7 @@
     stroke: $grey-b;
     stroke-width: 0.5px;
     &--active {
-      fill: $grey;
+      fill: $grey !important;
     }
   }
 }

@@ -492,7 +492,7 @@ export const timisoaraZones = [
   { id: 20, name: 'Dombovita', coo: [98, 84, 83, 82, 81, 112, 111, 110, 109] },
   { id: 21, name: 'Freidorf', coo: [106, 107, 108, 109, 110, 111, 113, 121, 114, 115, 116, 120] },
   { id: 22, name: 'Freidorf Parc industrial', coo: [114, 115, 116, 117] },
-  { id: 48, name: '', coo: [116, 117, 118, 119, 120] },
+  { id: 48, name: 'Utvin', coo: [116, 117, 118, 119, 120] },
   { id: 2, name: 'Iosefin', coo: [6, 5, 78, 79, 81, 112, 111, 113, 124, 123] },
   { id: 23, name: 'Solventul', coo: [121, 122, 123, 124, 113] },
   { id: 3, name: 'Gara Nord', coo: [123, 125, 126, 6] },

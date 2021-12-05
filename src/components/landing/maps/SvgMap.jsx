@@ -24,34 +24,41 @@ const SvgMap = () => {
   };
 
   return (
-    <svg viewBox="-50 0 500 500" xmlns="http://www.w3.org/2000/svg" className="c-map">
-      {timisoaraRegionsPath.map((region) => (
-        <path
-          onTouchStart={() => setHoeredElement(region.regionNo)}
-          onMouseEnter={() => setHoeredElement(region.regionNo)}
-          key={region.regionNo}
-          d={region.coord}
-          style={{
-            fill: colors[
-              allIssues.filter((issue) => issue.address.includes(timisoaraZones.find((zone) => zone.id === region.regionNo).name)).length
-            ],
-          }}
-          className={`c-map__region ${hoveredRegion === region.regionNo ? 'c-map__region--active' : ''}`}
-        />
-      ))}
-      {timisoaraRegionsText.map((region) => (
-        <text
-          onTouchStart={() => setHoeredElement(region.regionNo)}
-          onMouseEnter={() => setHoeredElement(region.regionNo)}
-          key={region.regionNo}
-          x={region.coord.x}
-          y={region.coord.y}
-          className="c-map__region-no"
-        >
-          {region.regionNo}
-        </text>
-      ))}
-    </svg>
+    <div className="section">
+      <div className="section__title">{timisoaraZones.find((zone) => zone.id === hoveredRegion)?.name}</div>
+      <div className="section__title">
+        Issues:
+        {allIssues.filter((issue) => issue.address.includes(timisoaraZones.find((zone) => zone.id === hoveredRegion)?.name)).length}
+      </div>
+      <svg viewBox="-50 0 500 500" xmlns="http://www.w3.org/2000/svg" className="c-map">
+        {timisoaraRegionsPath.map((region) => (
+          <path
+            onTouchStart={() => setHoeredElement(region.regionNo)}
+            onMouseEnter={() => setHoeredElement(region.regionNo)}
+            key={region.regionNo}
+            d={region.coord}
+            style={{
+              fill: colors[
+                allIssues.filter((issue) => issue.address.includes(timisoaraZones.find((zone) => zone.id === region.regionNo).name)).length
+              ],
+            }}
+            className={`c-map__region ${hoveredRegion === region.regionNo ? 'c-map__region--active' : ''}`}
+          />
+        ))}
+        {timisoaraRegionsText.map((region) => (
+          <text
+            onTouchStart={() => setHoeredElement(region.regionNo)}
+            onMouseEnter={() => setHoeredElement(region.regionNo)}
+            key={region.regionNo}
+            x={region.coord.x}
+            y={region.coord.y}
+            className="c-map__region-no"
+          >
+            {region.regionNo}
+          </text>
+        ))}
+      </svg>
+    </div>
   );
 };
 export default SvgMap;

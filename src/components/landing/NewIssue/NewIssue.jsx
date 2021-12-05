@@ -18,6 +18,7 @@ import { FetchStatus } from '../../../common/state/reducer/user.reducer';
 import { handleIsNotificationShowAC } from '../../../common/state/action/notification.action';
 import { useHistory } from 'react-router';
 import { resetNewIssueStatusAC } from '../../../common/state/action/issue.action';
+import EXIF from 'exif-js';
 Geocode.setApiKey('AIzaSyDRvC6Q5uvEzTFo_CB0RiegSYQ-PxNNUEc');
 Geocode.setLanguage('en');
 Geocode.setRegion('ro');
@@ -67,10 +68,25 @@ const NewIssue = ({ ...props }) => {
   }, [addIssueStatus]);
   const handlePhoto = async (e) => {
     const images = await Promise.all(
-      Array.from(e.target.files).map(async (file) => ({
-        name: file.name,
-        image: await toBase64(file),
-      }))
+      Array.from(e.target.files).map(async (file) => {
+        let lat, lng;
+
+        let exifData = await new Promise((resolve) =>
+          EXIF.getData(file, function () {
+            resolve(EXIF.getAllTags(this));
+          })
+        );
+
+        if (exifData?.GPSLatitude?.length && exifData?.GPSLongitude?.length) {
+          lat = ConvertDMSToDD(exifData.GPSLatitude[0], exifData.GPSLatitude[1], exifData.GPSLatitude[2], exifData.GPSLatitudeRef);
+          lng = ConvertDMSToDD(exifData.GPSLongitude[0], exifData.GPSLongitude[1], exifData.GPSLongitude[2], exifData.GPSLongitudeRef);
+          handleMapCoord([lat, lng]);
+        }
+        return {
+          name: file.name,
+          image: await toBase64(file),
+        };
+      })
     );
     setIssueData({
       ...issueData,
@@ -87,7 +103,13 @@ const NewIssue = ({ ...props }) => {
       },
     });
   };
-
+  function ConvertDMSToDD(degrees, minutes, seconds, direction) {
+    var dd = degrees + minutes / 60 + seconds / (60 * 60);
+    if (direction == 'S' || direction == 'W') {
+      dd = dd * -1;
+    } // Don't do anything for N or E
+    return dd;
+  }
   const handleChangeInput = (e) => {
     setIssueData({
       ...issueData,
@@ -108,8 +130,8 @@ const NewIssue = ({ ...props }) => {
       )
     );
     if (!zone)
-      return setIssueData({
-        ...issueData,
+      return setIssueData((issueCopy) => ({
+        ...issueCopy,
         zone: {
           value: {
             lat: null,
@@ -118,12 +140,12 @@ const NewIssue = ({ ...props }) => {
           },
           errorMessage: 'There is no area in Timisoara with these coordinates',
         },
-      });
+      }));
     const response = await Geocode.fromLatLng(lat, lng);
     const adress = zone.name + ', ' + response.results[0].formatted_address;
 
-    setIssueData({
-      ...issueData,
+    setIssueData((issueCopy) => ({
+      ...issueCopy,
       zone: {
         value: {
           lat,
@@ -131,7 +153,7 @@ const NewIssue = ({ ...props }) => {
           adress,
         },
       },
-    });
+    }));
   };
 
   const checkIfExistErrors = () => {
@@ -181,7 +203,7 @@ const NewIssue = ({ ...props }) => {
     <div className="section">
       <div className="section__header section__header--space-between">
         <div className="section__title">New Issue</div>
-        <button className="button">Add</button>
+        <div />
       </div>
       <div className="section__body">
         <div className="new-issue">
@@ -236,6 +258,7 @@ const NewIssue = ({ ...props }) => {
                       ],
                     },
                   });
+                  getLocation();
                 }}
               />
             </Modal>

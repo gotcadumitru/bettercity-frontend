@@ -91,4 +91,11 @@ export const otherAPI = {
       },
     });
   },
+  async getStatistics() {
+    return instance.get(`/statistics`, {
+      headers: {
+        Authorization: 'Bearer ' + authToken.getToken(),
+      },
+    });
+  },
 };
