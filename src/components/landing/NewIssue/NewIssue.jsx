@@ -105,7 +105,7 @@ const NewIssue = ({ ...props }) => {
   };
   function ConvertDMSToDD(degrees, minutes, seconds, direction) {
     var dd = degrees + minutes / 60 + seconds / (60 * 60);
-    if (direction == 'S' || direction == 'W') {
+    if (direction === 'S' || direction === 'W') {
       dd = dd * -1;
     } // Don't do anything for N or E
     return dd;
@@ -202,7 +202,15 @@ const NewIssue = ({ ...props }) => {
   return (
     <div className="section">
       <div className="section__header section__header--space-between">
-        <div className="section__title">New Issue</div>
+        <div
+          className="section__title"
+          onClick={() => {
+            navigator.clipboard.writeText('wallboardLink443232423');
+            console.log('copy');
+          }}
+        >
+          New Issue
+        </div>
         <div />
       </div>
       <div className="section__body">
